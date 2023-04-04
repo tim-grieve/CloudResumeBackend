@@ -11,7 +11,7 @@ provider "aws" {
   region  = var.provider_region_id
 }
 
-resource "aws_dynamodb_table" "visitor-count" {
+resource "aws_dynamodb_table" "visitor-counter" {
     name = "visitor_counter"
     billing_mode = "PAY_PER_REQUEST"
     hash_key = "count"
