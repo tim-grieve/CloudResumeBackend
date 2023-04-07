@@ -30,3 +30,11 @@ override.tf.json
 DynamoDB/.terraform.lock.hcl
 DynamoDB/deploy.tf
 DynamoDB/destroy.tf
+Lambda/.terraform.lock.hcl
+.idea/CloudResumeBackend.iml
+.gitignore
+.gitignore
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/inspectionProfiles/profiles_settings.xml
