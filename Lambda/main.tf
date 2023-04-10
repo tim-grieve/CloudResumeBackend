@@ -23,7 +23,7 @@ data "aws_iam_policy_document" "role_policy" {
     ]
 
     resources = [
-      "${var.dynamodb_arn}:table/*",
+      "${var.dynamodb_arn}",
     ]
   }
   
@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "role_policy" {
     ]
 
     resources = [
-      "${var.dynamodb_arn}:table/*/index/*",
+      "${var.dynamodb_arn}/index/*",
     ]
   }
 
