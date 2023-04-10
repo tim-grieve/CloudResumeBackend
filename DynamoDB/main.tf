@@ -1,33 +1,20 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.0"
-    }
-  }
-}
-
-provider "aws" {
-  region  = var.provider_region_id
-}
-
 resource "aws_dynamodb_table" "visitor-counter" {
-    name = "visitor_counter"
-    billing_mode = "PAY_PER_REQUEST"
-    hash_key = "SiteName"
+    name = var.dynamodb_table_name
+    billing_mode = var.dynamodb_table_billingmode
+    hash_key = var.dynamodb_table_hashkey
 
     attribute {
-      name = "SiteName"
-      type = "S"
+      name = var.dynamodb_table_attribute_name
+      type = var.dynamodb_attribute_type
     }
 
     ttl {
-        attribute_name = "TimeToExist"
-        enabled = false
+        attribute_name = var.dynamodb_table_ttl_attribute_name
+        enabled = var.dynamodb_table_ttl_attribute_enabled
     }
 
     tags = {
-        Name = "Resume Visitor Counter"
+        "var.dynamodb_table_tag_name" = var.dynamodb_table_tag_value
     }
 }
 
@@ -36,7 +23,7 @@ resource "aws_dynamodb_table_item" "initial_entry" {
   hash_key = aws_dynamodb_table.visitor-counter.hash_key
   item = <<ITEM
   {
-    "SiteName": {"S": "Resume"},
+    "SiteName": {"S":"${var.dynamodb_initial_value_sitename}"},
     "Count": {"N": "0"}
   }
   ITEM

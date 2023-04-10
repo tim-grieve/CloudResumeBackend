@@ -1,16 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.0"
-    }
-  }
-}
-
-provider "aws" {
-  region  = var.provider_region_id
-}
-
 data "aws_iam_policy_document" "assume_role" {
   statement {
     effect = "Allow"
@@ -83,7 +70,7 @@ resource "aws_iam_role_policy" "policy" {
 
 data "archive_file" "lambda" {
   type        = "zip"
-  source_file = "lambdafunction.py"
+  source_file = "./Lambda/lambdafunction.py"
   output_path = "lambda_function_payload.zip"
 }
 
@@ -100,16 +87,3 @@ resource "aws_lambda_function" "ResumeSiteCounter" {
   runtime = "python3.9"
 }
 
-resource "aws_apigatewayv2_api" "counter_api" {
-  name = "resume-counter-api"
-  protocol_type = "HTTP"
-  target = aws_lambda_function.ResumeSiteCounter.arn
-  route_key = "ANY /${aws_lambda_function.ResumeSiteCounter.function_name}"
-}
-
-resource "aws_lambda_permission" "apigateway_permissions" {
-  statement_id = "AllowExecutionFromAPIGateway"
-  action = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.ResumeSiteCounter.function_name
-  principal = "apigateway.amazonaws.com"
-}

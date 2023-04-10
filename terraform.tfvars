@@ -1,0 +1,12 @@
+provider_region_id = "ca-central-1"
+lambda_function_name = "ResumeSiteCounter"
+dynamodb_table_name = "visitor_counter"
+dynamodb_table_billingmode = "PAY_PER_REQUEST"
+dynamodb_table_hashkey = "SiteName"
+dynamodb_table_attribute_name = "SiteName"
+dynamodb_attribute_type = "S"
+dynamodb_table_ttl_attribute_name = "TimeToExist"
+dynamodb_table_ttl_attribute_enabled = false
+dynamodb_table_tag_name = "Name"
+dynamodb_table_tag_value = "Resume Visitor Counter"
+dynamodb_initial_value_sitename = "Resume"
