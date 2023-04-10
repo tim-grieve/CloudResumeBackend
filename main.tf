@@ -28,6 +28,18 @@ module "Dynamodb" {
 module "Lambda" {
     source = "./Lambda"
     lambda_function_name = var.lambda_function_name
+    lambda_role_permission_sid1 = var.lambda_role_permission_sid1
+    lambda_role_permission_sid2 = var.lambda_role_permission_sid2
+    lambda_role_permission_sid3 = var.lambda_role_permission_sid3
+    lambda_role_permission_type = var.lambda_role_permission_type
+    lambda_service_identifier = var.lambda_service_identifier
+    lambda_iam_role_name = var.lambda_iam_role_name
+    lambda_iam_policy_name = var.lambda_iam_policy_name
+    lambda_python_source_file = var.lambda_python_source_file
+    lambda_archive_output_path = var.lambda_archive_output_path
+    lambda_function_handler_name = var.lambda_function_handler_name
+    lambda_runtime_version = var.lambda_runtime_version
+    dynamodb_arn = module.Dynamodb.dynamodb_table_arn
 }
 
 module "APIGateway" {
