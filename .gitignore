@@ -28,8 +28,8 @@ override.tf.json
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
 DynamoDB/.terraform.lock.hcl
-DynamoDB/deploy.tf
-DynamoDB/destroy.tf
+./deploy.tf
+./destroy.tf
 Lambda/.terraform.lock.hcl
 .idea/CloudResumeBackend.iml
 .gitignore
