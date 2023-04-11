@@ -14,6 +14,12 @@ jobs:
         working-directory: ./
     
     steps:
+      - name: Configure AWS Credentials
+        uses: actions/configure-aws-credentials@v1
+        with: 
+          role-to-assume: arn:aws:iam::053127563287:role/GithubActionsRole
+          aws-region: ca-central-1
+          
       - name: checkout
         uses: actions/checkout@v2
 
