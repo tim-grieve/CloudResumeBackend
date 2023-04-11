@@ -37,4 +37,8 @@ jobs:
 
       - name: Terraform Plan
         id: Plan
-        run: terraform plan
+        run: terraform plan -out deploy.tf
+
+      - name: Terraform Apply
+        id: Apply
+        run: terraform apply deploy.tf
