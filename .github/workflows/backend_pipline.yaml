@@ -1,5 +1,9 @@
 name: crc_terraform_backend
-on: [push]
+on:
+  push:
+    branches:
+      - "main"
+
 jobs:
   Terraform_Deploy:
     runs-on: ubuntu-latest
@@ -7,7 +11,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./main
+        working-directory: ./
     
     steps:
       - name: checkout
