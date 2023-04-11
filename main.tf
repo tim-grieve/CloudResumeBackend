@@ -7,8 +7,8 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "arn:aws:s3:::terraform-state-crc-backend"
-    key = "backend/terraform.tfstate"
+    bucket = "terraform-state-crc-backend"
+    key = "terraform.tfstate"
     region = "ca-central-1" 
   }
 }
