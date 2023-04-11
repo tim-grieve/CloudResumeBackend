@@ -1,0 +1,23 @@
+name: crc_terraform_backend
+on: [push]
+jobs:
+  Terraform_Deploy:
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./main
+    
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.4.4
+      
+      - name: Terraform Init
+        id: Init
+        run: terraform init

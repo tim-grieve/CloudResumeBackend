@@ -5,6 +5,12 @@ terraform {
       version = "~> 4.0"
     }
   }
+
+  backend "s3" {
+    bucket = "arn:aws:s3:::terraform-state-crc-backend"
+    key = "backend/terraform.tfstate"
+    region = "ca-central-1" 
+  }
 }
 
 provider "aws" {
