@@ -3,8 +3,11 @@ resource "aws_apigatewayv2_api" "counter_api" {
   protocol_type = "HTTP"
   target = var.lambda_arn
   route_key = "ANY /${var.lambda_function_name}"
-  #target = aws_lambda_function.ResumeSiteCounter.arn
-  #route_key = "ANY /${aws_lambda_function.ResumeSiteCounter.function_name}"
+  
+  cors_configuration {
+    allow_origins = ["*"]
+    allow_methods = ["POST"]
+  }
 }
 
 resource "aws_lambda_permission" "apigateway_permissions" {
