@@ -13,6 +13,10 @@ def lambda_handler(event, context):
     )
     new_count = (count['Item']['Count']) + 1
 
+    return_item = {
+        "count": new_count
+    }
+
     response = table.update_item(
         Key ={
             'SiteName': 'Resume'
@@ -27,5 +31,5 @@ def lambda_handler(event, context):
     )
     return {
         'statusCode': 200,
-        'body': json.dumps(f'{new_count}')
+        'body': json.dumps(return_item)
     }

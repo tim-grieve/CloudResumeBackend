@@ -39,3 +39,4 @@ Lambda/.terraform.lock.hcl
 .idea/vcs.xml
 .idea/inspectionProfiles/profiles_settings.xml
 .terraform.lock.hcl
+.DS_Store
