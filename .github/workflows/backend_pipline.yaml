@@ -25,7 +25,7 @@ jobs:
 
       - name: checkout
         uses: actions/checkout@v2
-
+#Install Terraform on runner vm
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v1
         with:
