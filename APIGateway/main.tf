@@ -6,7 +6,8 @@ resource "aws_apigatewayv2_api" "counter_api" {
   
   cors_configuration {
     allow_origins = ["*"]
-    allow_methods = ["POST"]
+    allow_methods = ["POST","GET","OPTIONS"]
+    allow_headers = ["Content-Type"]
   }
 }
 
