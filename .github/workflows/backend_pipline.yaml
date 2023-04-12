@@ -22,7 +22,7 @@ jobs:
         with: 
           role-to-assume: arn:aws:iam::053127563287:role/GithubActionsRole
           aws-region: ca-central-1
-
+#Checkout git repository for pipeline run
       - name: checkout
         uses: actions/checkout@v2
 #Install Terraform on runner vm
