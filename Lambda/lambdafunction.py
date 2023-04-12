@@ -14,7 +14,7 @@ def lambda_handler(event, context):
     new_count = (count['Item']['Count']) + 1
 
     return_item = {
-        "count": new_count
+        "count": str(new_count)
     }
 
     response = table.update_item(
