@@ -8,6 +8,7 @@ resource "aws_apigatewayv2_api" "counter_api" {
     allow_origins = ["*"]
     allow_methods = ["POST","GET","OPTIONS"]
     allow_headers = ["Content-Type"]
+    
     max_age = 300
   }
 }

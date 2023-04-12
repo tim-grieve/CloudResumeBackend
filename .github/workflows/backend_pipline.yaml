@@ -37,7 +37,7 @@ jobs:
 #Plan out steps to be applied with terraform
       - name: Terraform Plan
         id: Plan
-        run: terraform plan -out deploy.tf
+        run: terraform plan -destroy -out deploy.tf
 #Apply changes based on terraform plan
       - name: Terraform Apply
         id: Apply
