@@ -19,3 +19,8 @@ resource "aws_lambda_permission" "apigateway_permissions" {
   function_name = var.lambda_function_name
   principal = "apigateway.amazonaws.com"
 }
+
+resource "aws_apigatewayv2_route" "options" {
+  api_id = aws_apigatewayv2_api.counter_api.id
+  route_key = "OPTIONS /{proxy+}"
+}
