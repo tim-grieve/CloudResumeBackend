@@ -52,5 +52,6 @@ module "APIGateway" {
     source = "./APIGateway"
     lambda_arn = module.Lambda.lambda_arn
     lambda_function_name = module.Lambda.lambda_function_name
+    lambda_invoke_arn = module.Lambda.lambda_invoke_url
 }
 
