@@ -26,7 +26,7 @@ resource "aws_apigatewayv2_integration" "options_lambda" {
 
   connection_type           = "INTERNET"
   description               = "Lambda OPTIONS"
-  integration_method        = "OPTIONS"
+  integration_method        = "POST"
   integration_uri           = var.lambda_invoke_arn
   passthrough_behavior      = "WHEN_NO_MATCH"
   
