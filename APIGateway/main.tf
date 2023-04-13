@@ -2,7 +2,7 @@ resource "aws_apigatewayv2_api" "counter_api" {
   name = "resume-counter-api"
   protocol_type = "HTTP"
   target = var.lambda_arn
-  route_key = "ANY /${var.lambda_function_name}/{proxy+}"
+  route_key = "ANY /${var.lambda_function_name}"
 }
 
 resource "aws_lambda_permission" "apigateway_permissions" {
