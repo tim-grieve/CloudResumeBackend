@@ -28,14 +28,14 @@ class Dynamodb_Resource(AWS_Resource):
         
     def get_count(self):
         return self.dynamodb_table.get_item(
-            key ={
+            key={
                 "SiteName": "Resume" 
             }
         )
     
     def update_count(self,new_count):
         self.dynamodb_table.update_item(
-            Key ={
+            Key={
                 "SiteName": "Resume"
             },
             UpdateExpression ="set #Count = :c",
