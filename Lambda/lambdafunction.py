@@ -16,9 +16,9 @@ class AWS_Resource:
         return boto3.resource(self.resource_type, region_name = self.region_name)
     
 class Dynamodb_Resource(AWS_Resource):
-    def __init__(self,region_name,table_name,table_key,table_value): 
+    def __init__(self,region_name, table_name,table_key,table_value): 
         resource_type = 'dynamodb'
-        super.init(resource_type,region_name)
+        super.__init__(resource_type,region_name)
         self.dynamodb_table = self.table(table_name = table_name)
         self.table_key = table_key
         self.table_value = table_value
