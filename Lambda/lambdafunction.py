@@ -10,7 +10,6 @@ class AWS_Resource:
     def __init__(self,resource_type,region_name):
         self.resource_type = resource_type
         self.region_name = region_name
-        self.connect()
         
     def connect(self):
         return boto3.resource(self.resource_type, region_name = self.region_name)
@@ -19,10 +18,11 @@ class Dynamodb_Resource(AWS_Resource):
     def __init__(self,region_name, table_name,table_key,table_value): 
         resource_type = 'dynamodb'
         super().__init__(resource_type,region_name)
+        self.connect()
         self.dynamodb_table = self.table(table_name = table_name)
         self.table_key = table_key
         self.table_value = table_value
-        
+
     def table(self,table_name):
         return self.Table(table_name)
     
