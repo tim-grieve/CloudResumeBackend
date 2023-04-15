@@ -18,7 +18,7 @@ class AWS_Resource:
 class Dynamodb_Resource(AWS_Resource):
     def __init__(self,region_name, table_name,table_key,table_value): 
         resource_type = 'dynamodb'
-        super.__init__(resource_type,region_name)
+        super().__init__(resource_type,region_name)
         self.dynamodb_table = self.table(table_name = table_name)
         self.table_key = table_key
         self.table_value = table_value
