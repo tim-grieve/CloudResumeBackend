@@ -11,7 +11,7 @@ class AWS_Resource:
         self.resource_type = resource_type
         self.region_name = region_name
         self.aws_resource = self.connect()
-        
+
     def connect(self):
         return boto3.resource(self.resource_type, region_name = self.region_name)
     
@@ -29,14 +29,14 @@ class Dynamodb_Resource(AWS_Resource):
     def get_count(self):
         return self.dynamodb_table.get_item(
             key ={
-                f"{self.table_key}" : f"{self.table_value}" 
+                "SiteName": "Resume" 
             }
         )
     
     def update_count(self,new_count):
         self.dynamodb_table.update_item(
             Key ={
-                f"{self.table_key}": f"{self.table_value}"
+                "SiteName": "Resume"
             },
             UpdateExpression ="set #Count = :c",
             ExpressionAttributeNames={
