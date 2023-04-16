@@ -9,7 +9,7 @@ resource "aws_dynamodb_table" "visitor-counter" {
     }
 
     ttl {
-        attribute_name = var.dynamodb_table_ttl_attribute_name
+        attribute_name = ""
         enabled = var.dynamodb_table_ttl_attribute_enabled
     }
 
