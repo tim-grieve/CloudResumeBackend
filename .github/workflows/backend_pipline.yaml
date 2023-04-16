@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v3
 #Install Terraform on runner vm
       - name: Install Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.4.4
  #Update tf state data     
