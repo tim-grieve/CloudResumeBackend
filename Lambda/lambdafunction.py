@@ -28,15 +28,15 @@ class Dynamodb_Resource(AWS_Resource):
         
     def get_count(self):
         return self.dynamodb_table.get_item(
-            key={
-                "SiteName": "Resume" 
+            Key={
+                f"{dynamodb_table_key}": f"{dynamodb_table_value}" 
             }
         )
     
     def update_count(self,new_count):
         self.dynamodb_table.update_item(
             Key={
-                "SiteName": "Resume"
+                f"{dynamodb_table_key}": f"{dynamodb_table_value}" 
             },
             UpdateExpression ="set #Count = :c",
             ExpressionAttributeNames={
@@ -61,34 +61,6 @@ def lambda_handler(event, context):
    dynamodb = Dynamodb_Resource(aws_region_name,dynamodb_table_name,dynamodb_table_key,dynamodb_table_value)
 
    return_item = dynamodb.increment_count()
-   
-   ''' dynamodb = boto3.resource('dynamodb', region_name = aws_region_name)
-
-    table = dynamodb.Table('visitor_counter')
-
-    count = table.get_item(
-        Key={
-            "SiteName": "Resume"
-        }
-    )
-    new_count = (count['Item']['Count']) + 1
-
-    return_item = {
-        "count": str(new_count)
-    }
-
-    response = table.update_item(
-        Key ={
-            'SiteName': 'Resume'
-        },
-        UpdateExpression ="set #Count = :c",
-        ExpressionAttributeNames={
-            '#Count': 'Count'
-        },
-        ExpressionAttributeValues={
-            ':c':new_count
-        }
-    ) '''
    
    return {
         'statusCode': 200,
