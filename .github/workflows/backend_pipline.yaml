@@ -24,7 +24,7 @@ jobs:
           aws-region: ca-central-1
 #Checkout git repository for pipeline run
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 #Install Terraform on runner vm
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v1
