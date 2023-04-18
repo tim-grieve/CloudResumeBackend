@@ -3,8 +3,8 @@ module.exports = defineConfig({
     projectId: "kjixxa",
     e2e: {
         baseUrl: 'https://resume.shellflow.com',
-        supportFile: false
+        supportFile: false,
+        specPattern: 'e2e/*.cy.js'
     },
-    integrationFolder: "./integration",
     // The rest of the Cypress config options go here...
 })
