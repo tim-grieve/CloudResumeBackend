@@ -18,6 +18,8 @@ jobs:
       - name: Install npm
         id: npm
         run: npm install cypress --save-dev
+        with:
+          working-directory: Cypress_Tests
 
       - name: Cypress run
         uses: cypress-io/github-action@v5
