@@ -32,7 +32,7 @@ jobs:
         with:
           pythonVersion: '3.9.0'
         
-      - run: python tests.py 
+      - run: python ./Lambda/tests.py 
 #Install Terraform on runner vm
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
