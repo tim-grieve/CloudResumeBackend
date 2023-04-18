@@ -9,7 +9,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./CloudResumeBackend/Cypress_Tests
+        working-directory: ./
   
     steps:
       - name: checkout
@@ -19,6 +19,9 @@ jobs:
 
       - name: Cypress run
         uses: cypress-io/github-action@v5
+        with:
+          working-directory: Cypress_Tests
+          spec: *.js
 
 
 
