@@ -25,6 +25,13 @@ jobs:
 #Checkout git repository for pipeline run
       - name: checkout
         uses: actions/checkout@v3
+
+#Install Python and run unit tests on Lambda python code
+      - name: Install Python 3.9 and run unit tests on Lambda Python code
+        uses: actions/setup-python@v4
+        with:
+          pythonVersion: '3.9.0'
+        run: tests.py 
 #Install Terraform on runner vm
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
@@ -37,8 +44,4 @@ jobs:
 #Plan out steps to be applied with terraform
       - name: Terraform Plan
         id: Plan
-        run: terraform plan -out deploy.tf
-#Apply changes based on terraform plan
-      - name: Terraform Apply
-        id: Apply
-        run: terraform apply deploy.tf
+        run: terraform plan
