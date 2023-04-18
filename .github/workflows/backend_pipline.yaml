@@ -31,6 +31,9 @@ jobs:
         uses: actions/setup-python@v4
         with:
           pythonVersion: '3.9.0'
+          cache: pip
+
+      - run: pip install -r requirements.txt
         
       - run: python ./Lambda/tests.py 
 #Install Terraform on runner vm
