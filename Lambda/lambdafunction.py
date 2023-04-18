@@ -50,7 +50,7 @@ class Dynamodb_Resource(AWS_Resource):
     def increment_count(self):
         table_item = self.get_count()
         new_count = (table_item['Item']['Count']) + 1
-        self.update_count(new_count=new_coun)tests
+        self.update_count(new_count=new_count)
         return_item = {
             "count": str(new_count)
         }
