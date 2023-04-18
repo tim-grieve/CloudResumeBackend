@@ -1,4 +1,3 @@
-unittest
 boto3
 decimal
 json
