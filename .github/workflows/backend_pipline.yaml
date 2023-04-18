@@ -27,11 +27,12 @@ jobs:
         uses: actions/checkout@v3
 
 #Install Python and run unit tests on Lambda python code
-      - name: Install Python 3.9 and run unit tests on Lambda Python code
+      - name: Install Python 3.9
         uses: actions/setup-python@v4
         with:
           pythonVersion: '3.9.0'
-        run: tests.py 
+        
+      - run: python tests.py 
 #Install Terraform on runner vm
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
