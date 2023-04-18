@@ -5,5 +5,6 @@ module.exports = defineConfig({
         baseUrl: 'https://resume.shellflow.com',
         supportFile: false
     },
+    integrationFolder: "./integration",
     // The rest of the Cypress config options go here...
 })
