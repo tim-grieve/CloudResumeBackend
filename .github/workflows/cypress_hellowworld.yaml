@@ -15,7 +15,9 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
       
-
+      - name: Install npm
+        id: npm
+        run: npm install cypress --save-dev
 
       - name: Cypress run
         uses: cypress-io/github-action@v5
