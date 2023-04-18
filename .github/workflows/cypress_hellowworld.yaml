@@ -1,0 +1,20 @@
+name: cypress_hello_world
+on:
+  workflow_dispatch:
+
+jobs:
+  Cypress_Runner:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./
+  
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+
+
+    
