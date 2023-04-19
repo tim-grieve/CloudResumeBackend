@@ -32,7 +32,7 @@ jobs:
         with:
           terraform_version: 1.4.4
 
- #Configure environemnt   
+ #Configure environemnt for deployment  
       - name: Terraform INIT
         run: terraform init
 
