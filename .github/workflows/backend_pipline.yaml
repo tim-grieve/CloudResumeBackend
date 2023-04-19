@@ -52,5 +52,5 @@ jobs:
         run: terraform plan -var-file="test.tfvars" -out deploy.tf
 
       - name: Terraform Apply in test
-        run: terraform apply -var-file="test.tfvars" deploy.tf
+        run: terraform apply deploy.tf
 
