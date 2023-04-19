@@ -43,6 +43,5 @@ jobs:
 
  #Test deployment in test environment   
       - name: Terraform Test Actions
-        working-directory: aws_s3_bucket
-        run: terraform workspace select test
+        run: terraform init
 
