@@ -21,3 +21,4 @@ dynamodb_table_ttl_attribute_enabled = false
 dynamodb_table_tag_name = "Name"
 dynamodb_table_tag_value = "Resume Visitor Counter"
 dynamodb_initial_value_sitename = "Resume"
+apigateway_name = "resume-counter-api_test"

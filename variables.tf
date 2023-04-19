@@ -90,3 +90,7 @@ variable "dynamodb_table_tag_value" {
 variable "dynamodb_initial_value_sitename" {
   type = string
 }
+
+variable "apigateway_name" {
+  type = string
+}

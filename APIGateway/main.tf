@@ -1,5 +1,5 @@
 resource "aws_apigatewayv2_api" "counter_api" {
-  name = "resume-counter-api"
+  name = var.apigateway_name
   protocol_type = "HTTP"
   target = var.lambda_arn
   route_key = "ANY /${var.lambda_function_name}"
