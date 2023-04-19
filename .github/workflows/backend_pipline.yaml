@@ -109,6 +109,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: gh pr create --head "test" --base "main" --title "Merge Tested Changes into Main Repository" --body "Deploying to production" --repo "tim-grieve/CloudResumeBackend"
+      
+      - name: Approve Pull request
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: gh pr review --approve
 
 
 
