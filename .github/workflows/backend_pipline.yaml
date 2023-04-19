@@ -42,7 +42,7 @@ jobs:
           terraform_version: 1.4.4
 
  #Test deployment in test environment   
-      - name: Terraform Init
-        working-directory: arn:aws:s3:::terraform-state-crc-backend
-        run: terraform init
+      - name: Terraform Test Actions
+        working-directory: aws_s3_bucket
+        run: terraform workspace select test
 
