@@ -8,7 +8,7 @@ permissions:
   contents: write
   
 jobs:
-  Terraform_Deploy:
+  Tests:
     runs-on: ubuntu-latest
     
     defaults:
@@ -53,4 +53,43 @@ jobs:
 
       - name: Terraform Apply in test
         run: terraform apply deploy.tf
+
+  Destroy:
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./
+    
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with: 
+          role-to-assume: arn:aws:iam::053127563287:role/GithubActionsRole
+          aws-region: ca-central-1
+#Checkout git repository for pipeline run
+      - name: checkout
+        uses: actions/checkout@v3
+
+      #Install Terraform on runner vm
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.4.4
+  
+      - name: Terraform INIT
+        run: terraform init
+
+      - name: Select Terraform Test Workspace
+        run: terraform workspace select test
+
+      - name: Terraform Plan Destroy Test Resources
+        run: terraform plan -destroy -var-file="test.tfvars" -out destroy.tf
+
+      - name: Terraform Apply Destroy Test Resources
+        run: terraform apply destroy.tf
+        
+
 
