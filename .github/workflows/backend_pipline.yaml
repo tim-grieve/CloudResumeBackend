@@ -103,6 +103,8 @@ jobs:
 
     steps:
       - name: Create Pull request
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: gh pr create --title "Merge Tested Changes into Main Repository" --body "Deploying to production"
 
 
