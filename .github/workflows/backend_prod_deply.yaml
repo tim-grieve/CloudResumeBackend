@@ -38,4 +38,7 @@ jobs:
 
       - name: Select Terraform default Workspace
         run: terraform workspace select default
+
+      - name: Plan Prod_Deploy
+        run: terraform plan -out deploy.tf
     
