@@ -41,4 +41,7 @@ jobs:
 
       - name: Plan Prod_Deploy
         run: terraform plan -out deploy.tf
+
+      - name: Apply changes to prod
+        run: terraform apply deploy.tf
     
