@@ -1,0 +1,41 @@
+name: backend_prod_deploy
+on:
+  push:
+    branches:
+      - "main"
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  Prod_Deploy:
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./
+    
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with: 
+          role-to-assume: arn:aws:iam::053127563287:role/GithubActionsRole
+          aws-region: ca-central-1
+#Checkout git repository for pipeline run
+      - name: checkout
+        uses: actions/checkout@v3
+      
+      #Install Terraform on runner vm
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.4.4
+
+ #Configure environemnt for deployment  
+      - name: Terraform INIT
+        run: terraform init
+
+      - name: Select Terraform default Workspace
+        run: terraform workspace select default
+    
