@@ -1,0 +1,40 @@
+name: create_terraform_workspace
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: write
+  
+jobs:
+  Create_Terraform_Workspace:
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./
+    
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with: 
+          role-to-assume: arn:aws:iam::053127563287:role/GithubActionsRole
+          aws-region: ca-central-1
+#Checkout git repository for pipeline run
+      - name: checkout
+        uses: actions/checkout@v3
+
+#Install Terraform on runner vm
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.4.4
+#Update tf state data     
+      - name: Terraform Init
+        id: Init
+        run: terraform init
+#Create New Terraform Workspace    
+      - name: Terraform create test Workspace
+        id: new_workspace
+        run: terraform workspace new -state=terraform.tfstate test
