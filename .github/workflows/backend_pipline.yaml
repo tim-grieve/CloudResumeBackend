@@ -103,7 +103,7 @@ jobs:
 
     steps:
       - name: Create Pull request
-        run: gh pr create --title "Merge Tested Changes into Main Repository" --body "Deploying to production"  https://github.com/tim-grieve/CloudResumeBackend/pull/1
+        run: gh pr create --title "Merge Tested Changes into Main Repository" --body "Deploying to production"
 
 
 
