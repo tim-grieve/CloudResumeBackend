@@ -93,7 +93,8 @@ jobs:
         run: terraform apply destroy.tf
 
   Main_Branch_Pull_Request:
-    permissions: write-all
+    permissions:
+      pull-requests: writert
     needs: Tests
     runs-on: ubuntu-latest
 
