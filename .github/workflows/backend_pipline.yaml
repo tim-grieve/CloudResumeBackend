@@ -94,7 +94,7 @@ jobs:
 
   Main_Branch_Pull_Request:
     permissions:
-      pull-requests: writert
+      pull-requests: write
     needs: Tests
     runs-on: ubuntu-latest
 
