@@ -115,6 +115,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PULL_APPROVER }}
         run: gh pr review test --repo "tim-grieve/CloudResumeBackend" --approve
 
+      - name: Merge Pull request
+        env:
+          GITHUB_TOKEN: ${{ secrets.PULL_APPROVER }}
+        run: gh pr merge test --repo "tim-grieve/CloudResumeBackend" --merge
+
 
 
 
