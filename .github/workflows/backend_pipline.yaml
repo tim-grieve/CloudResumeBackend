@@ -113,7 +113,7 @@ jobs:
       - name: Approve Pull request
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: gh pr review --approve
+        run: gh pr review --approve --repo "tim-grieve/CloudResumeBackend"
 
 
 
