@@ -2,7 +2,7 @@ name: crc_terraform_backend
 on:
   push:
     branches:
-      - "main"
+      - "test"
 permissions:
   id-token: write
   contents: write
