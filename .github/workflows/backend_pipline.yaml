@@ -93,6 +93,7 @@ jobs:
         run: terraform apply destroy.tf
 
   Main_Branch_Pull_Request:
+    permissions: write-all
     needs: Tests
     runs-on: ubuntu-latest
 
@@ -100,6 +101,7 @@ jobs:
       run:
         shell: bash
         working-directory: ./
+        
 
     steps:
       - name: Create Pull request
