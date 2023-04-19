@@ -54,8 +54,9 @@ jobs:
       - name: Terraform Apply in test
         run: terraform apply deploy.tf
 
-  Destroy:
+  Destroy: 
     if: ${{ always() }}
+    needs: Tests
     runs-on: ubuntu-latest
 
     defaults:
@@ -90,6 +91,20 @@ jobs:
 
       - name: Terraform Apply Destroy Test Resources
         run: terraform apply destroy.tf
-        
+
+  Main_Branch_Pull_Request:
+    needs: Tests
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./
+
+    steps:
+      - name: Create Pull request
+        run: gh pr create --title "Merge Tested Changes into Main Repository" --body "Deploying to production"  https://github.com/tim-grieve/CloudResumeBackend/pull/1
+
+
 
 
