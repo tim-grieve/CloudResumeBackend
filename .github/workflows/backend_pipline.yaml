@@ -30,7 +30,7 @@ jobs:
       - name: Install Python 3.9
         uses: actions/setup-python@v4
         with:
-          pythonVersion: '3.9.0'
+          python-version: '3.9.0'
           cache: pip3
 
       - run: pip3 install -r requirements.txt
