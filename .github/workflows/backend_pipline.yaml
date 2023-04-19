@@ -48,6 +48,9 @@ jobs:
       - name: Select Terraform Test Workspace
         run: terraform workspace select test
 
-      - name: Terraform Plan
-        run: terraform plan -var-file="test.tfvars"
+      - name: Terraform Plan in Test
+        run: terraform plan -var-file="test.tfvars" -out deploy.tf
+
+      - name: Terraform Apply in test
+        run: terraform apply -var-file="test.tfvars" deploy.tf
 
