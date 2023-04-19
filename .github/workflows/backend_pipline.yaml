@@ -40,11 +40,9 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.4.4
- #Update tf state data     
+
+ #Test deployment in test environment   
       - name: Terraform Init
-        id: Init
-        run: terraform init
-#Plan out steps to be applied with terraform
-      - name: Terraform Plan
-        id: Plan
-        run: terraform plan
+        working-directory: arn:aws:s3:::terraform-state-crc-backend
+        run: terraform workspace select test
+
