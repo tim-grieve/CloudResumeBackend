@@ -1,0 +1,132 @@
+name: crc_terraform_backend
+on:
+    push:
+      branches:
+        - "test"
+permissions:
+  id-token: write
+  contents: write
+  
+jobs:
+  Tests:
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./
+    
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with: 
+          role-to-assume: arn:aws:iam::053127563287:role/GithubActionsRole
+          aws-region: ca-central-1
+#Checkout git repository for pipeline run
+      - name: checkout
+        uses: actions/checkout@v3
+
+#Install Python and run unit tests on Lambda python code
+      - name: Install Python 3.1
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12.0-alpha.7'
+
+      - run: pip3 install -r ./src/python/tests/requirements.txt
+
+      - name: Python Tests
+        working-directory: ./src/python
+        run: python3 -m tests.tests 
+#Install Terraform on runner vm
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.4.4
+
+ #Test deployment in test environment   
+      - name: Terraform INIT
+        working-directory: ./src/terraform
+        run: terraform init
+
+      - name: Select Terraform Test Workspace
+        working-directory: ./src/terraform
+        run: terraform workspace select test
+
+      - name: Terraform Plan in Test
+        working-directory: ./src/terraform
+        run: terraform plan -var-file="test.tfvars" -out deploy.tf
+
+      - name: Terraform Apply in test
+        working-directory: ./src/terraform
+        run: terraform apply deploy.tf
+
+  Destroy: 
+    if: ${{ always() }}
+    needs: Tests
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./
+    
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with: 
+          role-to-assume: arn:aws:iam::053127563287:role/GithubActionsRole
+          aws-region: ca-central-1
+#Checkout git repository for pipeline run
+      - name: checkout
+        uses: actions/checkout@v3
+
+      #Install Terraform on runner vm
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.4.4
+  
+      - name: Terraform INIT
+        working-directory: ./src/terraform
+        run: terraform init
+
+      - name: Select Terraform Test Workspace
+        working-directory: ./src/terraform
+        run: terraform workspace select test
+
+      - name: Terraform Plan Destroy Test Resources
+        working-directory: ./src/terraform
+        run: terraform plan -destroy -var-file="test.tfvars" -out destroy.tf
+
+      - name: Terraform Apply Destroy Test Resources
+        working-directory: ./src/terraform
+        run: terraform apply destroy.tf
+
+  Main_Branch_Pull_Request:
+    permissions:
+      pull-requests: write
+    needs: Tests
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./
+        
+#Final step to approve for prod
+    steps:
+      - name: Create Pull request
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: gh pr create --head "test" --base "main" --title "Merge Tested Changes into Main Repository" --body "Deploying to production" --repo "tim-grieve/CloudResumeBackend"
+      
+      - name: Approve Pull request
+        env:
+          GITHUB_TOKEN: ${{ secrets.PULL_APPROVER }}
+        run: gh pr review test --repo "tim-grieve/CloudResumeBackend" --approve
+
+      - name: Merge Pull request
+        env:
+          GITHUB_TOKEN: ${{ secrets.PULL_APPROVER }}
+        run: gh pr merge test --repo "tim-grieve/CloudResumeBackend" --merge
+
