@@ -40,3 +40,8 @@ Lambda/.terraform.lock.hcl
 .idea/inspectionProfiles/profiles_settings.xml
 .terraform.lock.hcl
 .DS_Store
+src/python/__pycache__/main.cpython-310.pyc
+src/python/aws_lambda/__pycache__/__init__.cpython-310.pyc
+src/python/aws_lambda/__pycache__/lambda_function.cpython-310.pyc
+src/python/tests/__pycache__/__init__.cpython-310.pyc
+src/python/tests/__pycache__/tests.cpython-310.pyc
