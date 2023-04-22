@@ -21,10 +21,10 @@ All of the components and deployed via terraform IAC.
 All changes are committed to the test branch of the repo which triggers a git hub action to perform a series of tests including unit tests for the Lambda python code and a test deployment of the terraform code to ensure success. On successful completion of the test work flow a pull request is issued to merge the changes into the main branch. When the changes are merged into the main branch a second  workflow is triggered which deploys any changes to production.
 
 ## Areas for improvement
-### Folder Structure
-There are a few files and folders that could be rearranged to improved the logical layout of the code.
 ### Python tests
 Some more testing around edge cases would be benifical.
 ### Make the visitor counter smarter
 The visitor count currently increments by 1 each time the function is called. This could be improved to find a count of unique visitors only.
+### Seperate the lambada zip file creation into a seperate step 
+Independent of the main terraform code so that it can be called seperately from the test and main branch commits
 
