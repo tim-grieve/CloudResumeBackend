@@ -33,8 +33,10 @@ jobs:
           python-version: '3.12.0-alpha.7'
 
       - run: pip3 install -r ./src/python/tests/requirements.txt
-        
-      - run: python3 -m tests.tests 
+
+      - name: Python Tests
+        working-directory: ./src/python
+        run: python3 -m tests.tests 
 #Install Terraform on runner vm
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
