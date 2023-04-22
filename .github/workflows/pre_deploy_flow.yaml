@@ -1,6 +1,11 @@
 name: crc_terraform_backend
 on:
-  workflow_dispatch:
+    push:
+      branches:
+        - "test"
+permissions:
+  id-token: write
+  contents: write
   
 jobs:
   Tests:
@@ -28,8 +33,10 @@ jobs:
           python-version: '3.12.0-alpha.7'
 
       - run: pip3 install -r ./src/python/tests/requirements.txt
-        
-      - run: python3 -m tests.tests 
+
+      - name: Python Tests
+        working-directory: ./src/python
+        run: python3 -m tests.tests 
 #Install Terraform on runner vm
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
@@ -38,15 +45,19 @@ jobs:
 
  #Test deployment in test environment   
       - name: Terraform INIT
+        working-directory: ./src/terraform
         run: terraform init
 
       - name: Select Terraform Test Workspace
+        working-directory: ./src/terraform
         run: terraform workspace select test
 
       - name: Terraform Plan in Test
+        working-directory: ./src/terraform
         run: terraform plan -var-file="test.tfvars" -out deploy.tf
 
       - name: Terraform Apply in test
+        working-directory: ./src/terraform
         run: terraform apply deploy.tf
 
   Destroy: 
@@ -76,15 +87,19 @@ jobs:
           terraform_version: 1.4.4
   
       - name: Terraform INIT
+        working-directory: ./src/terraform
         run: terraform init
 
       - name: Select Terraform Test Workspace
+        working-directory: ./src/terraform
         run: terraform workspace select test
 
       - name: Terraform Plan Destroy Test Resources
+        working-directory: ./src/terraform
         run: terraform plan -destroy -var-file="test.tfvars" -out destroy.tf
 
       - name: Terraform Apply Destroy Test Resources
+        working-directory: ./src/terraform
         run: terraform apply destroy.tf
 
   Main_Branch_Pull_Request:
@@ -114,7 +129,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PULL_APPROVER }}
         run: gh pr merge test --repo "tim-grieve/CloudResumeBackend" --merge
-
-
-
 

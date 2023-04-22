@@ -1,6 +1,7 @@
 import unittest
 import decimal
-from lambdafunction import Dynamodb_Resource, aws_region_name, dynamodb_table_name, dynamodb_table_key, dynamodb_table_value
+
+from aws_lambda.lambda_function import Dynamodb_Resource, aws_region_name, dynamodb_table_name, dynamodb_table_key, dynamodb_table_value
 
 
 class AwsConnectivity(unittest.TestCase):
@@ -22,9 +23,10 @@ class AwsConnectivity(unittest.TestCase):
         new_count = connection.increment_count()
         self.assertTrue(new_count - count == 1, "Count not incrementing by 1")
 
-# Run tests
 tests = AwsConnectivity()
 
 tests.test_connection()
 tests.test_count_value()
 tests.test_increment_count()
+
+print(aws_region_name)
