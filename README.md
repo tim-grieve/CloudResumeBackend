@@ -25,6 +25,6 @@ All changes are committed to the test branch of the repo which triggers a git hu
 Some more testing around edge cases would be benifical.
 ### Make the visitor counter smarter
 The visitor count currently increments by 1 each time the function is called. This could be improved to find a count of unique visitors only.
-### Seperate the lambada zip file creation into a seperate step 
+### Seperate the lambda zip file creation into a seperate step 
 Independent of the main terraform code so that it can be called seperately from the test and main branch commits
 
